@@ -17,6 +17,7 @@ const BlogPost = ({node}) => {
   )
 }
 
+
 const IndexPage = ({data}) => (
   <Layout>
   <HeadText />
@@ -30,28 +31,23 @@ export default IndexPage
 
 export const pageQuery = graphql`
   query pageQuery {
-    allContentfulBlog (
-      filter: {
-        node_locale: { eq: "en-US" }
-      }
-      sort: { fields: [publishDate], order: DESC }
-    ) {
-        edges {
-          node {
-            title
-            slug
-            body {
-              childMarkdownRemark {
-                excerpt
-              }
+    allContentfulBlog(filter: {node_locale: {eq: "en-US"}}, sort: {fields: [publishDate], order: DESC}) {
+      edges {
+        node {
+          title
+          slug
+          body {
+            childMarkdownRemark {
+              excerpt
             }
-            heroImage {
-              fixed(height: 300) {
-                src
-              }
+          }
+          heroImage {
+            fixed(height: 300) {
+              src
             }
           }
         }
+      }
     }
-  }
+  }  
 `

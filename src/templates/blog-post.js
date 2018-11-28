@@ -1,5 +1,6 @@
-import React, { Component} from 'react';
-import PropTypes from 'prop-types';
+import React, { Component} from 'react'
+import PropTypes from 'prop-types'
+import Helmet from 'react-helmet'
 import Layout from '../components/layout'
 
 class BlogPost extends Component {
@@ -10,6 +11,7 @@ class BlogPost extends Component {
     } = this.props.data.contentfulBlog
     return (
       <Layout>
+        <Helmet title={`${title}`} />
         <h1>{title}</h1>
         <div dangerouslySetInnerHTML={{__html: body.childMarkdownRemark.html}} />
       </Layout>
