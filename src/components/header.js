@@ -1,33 +1,28 @@
-import React from 'react'
+import React, { Component } from 'react';
 import { Link } from 'gatsby'
+import Menu from './Menu'
+import Logo from '../images/logo.png';
+import './header.css'
 
-const Header = ({ siteTitle }) => (
-  <div
-    style={{
-      background: 'rebeccapurple',
-      marginBottom: '1.45rem',
-    }}
-  >
-    <div
-      style={{
-        margin: '0 auto',
-        maxWidth: 960,
-        padding: '1.45rem 1.0875rem',
-      }}
-    >
-      <h1 style={{ margin: 0 }}>
-        <Link
-          to="/"
-          style={{
-            color: 'white',
-            textDecoration: 'none',
-          }}
-        >
-          {siteTitle}
-        </Link>
-      </h1>
-    </div>
-  </div>
-)
+class Header extends Component {
+  render() {
+    return (
+      
+      <header>
+        <div className="container">
+          <div className="logo">
+            <h1 style={{ margin: 0 }}>
+              <Link to="/">
+                <img src={Logo} alt="Site Logo" />
+              </Link>
+            </h1>
+          </div>
+          <Menu />     
+        </div>
+      </header>
+      
+    );
+  }
+}
 
-export default Header
+export default Header;

@@ -682,3 +682,16 @@ ul.blog-post li p {
   font-family: Open Sans, sans-serif;
   font-weight: 300;
 }
+
+.container {
+  max-width: 1170px;
+  margin: 0 auto;
+}
+
+.bannerImg {
+  box-shadow: 0 0 14px #00000030;
+  margin-bottom: 50px;
+}
+.bannerImg img {
+  margin: 0;
+}

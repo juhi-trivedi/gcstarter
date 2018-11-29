@@ -1,9 +1,8 @@
 import React from 'react'
-import { Link } from 'gatsby'
+import { Link, graphql } from 'gatsby'
 import Layout from '../components/layout'
 import HeadText from './headText'
 import '../components/layout.css'
-import { graphql } from 'gatsby'
 
 const BlogPost = ({node}) => {
   return (
@@ -19,12 +18,12 @@ const BlogPost = ({node}) => {
 
 
 const IndexPage = ({data}) => (
-  <Layout>
-  <HeadText />
-    <ul className="blog-post">
-      {data.allContentfulBlog.edges.map((edge) => <BlogPost node={edge.node} key={Math.random()} />)}
-    </ul>
-  </Layout>
+    <Layout>
+      <HeadText />
+      <ul className="blog-post">
+        {data.allContentfulBlog.edges.map((edge) => <BlogPost node={edge.node} key={Math.random()} />)}
+      </ul>
+    </Layout>
 )
 
 export default IndexPage
