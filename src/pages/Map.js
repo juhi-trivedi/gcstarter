@@ -1,0 +1,25 @@
+import React from "react";
+import { StaticQuery, graphql } from "gatsby";
+
+const Map = ({ data }) => (
+  <div className="mapsbox">
+    <iframe src = {"https://maps.google.com/maps?q="+data.contentfulPages.location.lat+","+data.contentfulPages.location.lon+"&hl=es;z=14&output=embed" }></iframe>
+  </div>
+)
+
+export default props => (
+  <StaticQuery
+    query={graphql`
+      query {
+        contentfulPages {
+          location {
+            lon
+            lat
+          }
+        }
+      }
+    `}
+    render={data => <Map data={data} {...props} />}
+  />
+)
+
