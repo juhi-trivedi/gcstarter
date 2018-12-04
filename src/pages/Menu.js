@@ -21,8 +21,9 @@ class Menu extends Component {
           </Link>
         </li>
       </ul>
-    )
-  }
+      
+      );
+    }
 }
 
-export default Menu
+export default Menu;

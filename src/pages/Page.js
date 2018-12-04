@@ -1,37 +1,45 @@
 import React from 'react'
-import Layout from '../components/layout'
 import { Link, graphql } from 'gatsby'
+import Layout from '../components/layout'
 
-const InnerPage = ({ node }) => {
+
+const PageLinks = ({ node }) => {
   return (
-    <div className="abouttext">
+    <li>
       <Link to={node.slug}>{node.title}</Link>
-    </div>
+    </li>
   )
 }
 
-const PageList = ({ data }) => (
-  <Layout>
-    <div className="about-page">
-      {data.allContentfulPages.edges.map((edge) => <InnerPage node={edge.node} key={Math.random()} />)}
-    </div>
-  </Layout>
-)
+const PageList = ({ data }) => {  
+  return (  
+    <Layout>
+    <ul className="menulist">
+      <li>
+        <Link to="/">
+          Home
+        </Link>
+      </li>
+      {data.allContentfulPages.edges.map((edge) => <PageLinks node={edge.node} key={Math.random()} />)}
+      <li>
+        <Link to="/Contact/">
+          Contact
+        </Link>
+      </li>
+    </ul>
+    </Layout>
+  )
+}
 
 export default PageList
 
-export const listQuery = graphql`
-  query listQuery {
+export const query = graphql`
+  query pagelistQuery {
     allContentfulPages {
       edges {
         node {
           title
           slug
-          body {
-            childMarkdownRemark {
-              html
-            }
-          }
         }
       }
     }

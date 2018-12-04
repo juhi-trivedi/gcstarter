@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { graphql } from 'gatsby';
-import Header from '../components/header';
+import Header from '../pages/header';
 import Helmet from 'react-helmet';
 
 class InnerPage extends Component {

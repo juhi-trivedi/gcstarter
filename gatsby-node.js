@@ -36,29 +36,30 @@ exports.createPages = ({graphql, actions}) => {
 
 
     const loadPages = new Promise((resolve, reject) => {
-        graphql(`
-          {
-            allContentfulPages {
-              edges {
-                node {
-                  slug
+        resolve(
+            graphql(`
+              {
+                allContentfulPages {
+                  edges {
+                    node {
+                      slug
+                    }
+                  }
                 }
               }
-            }
-          }
-        `).then(result => {
-          const pages = result.data.allContentfulPages.edges
-          pages.map(({ node }) => {
-            createPage({
-              path: `${node.slug}/`,
-              component: path.resolve(`./src/templates/inner-page.js`),
-              context: {
-                slug: node.slug,
-              },
+            `).then(result => {
+              const pages = result.data.allContentfulPages.edges
+              pages.map(({ node }) => {
+                createPage({
+                  path: `${node.slug}/`,
+                  component: path.resolve(`./src/templates/inner-page.js`),
+                  context: {
+                    slug: node.slug,
+                  },
+                })
+              })
             })
-          })
-          resolve()
-        })
+        )
       })
     
   return Promise.all([loadBlogs, loadPages])

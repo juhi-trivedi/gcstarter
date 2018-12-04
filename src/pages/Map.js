@@ -3,7 +3,7 @@ import { StaticQuery, graphql } from "gatsby";
 
 const Map = ({ data }) => (
   <div className="mapsbox">
-    <iframe src = {"https://maps.google.com/maps?q="+data.contentfulPages.location.lat+","+data.contentfulPages.location.lon+"&hl=es;z=14&output=embed" }></iframe>
+    <iframe title={data.contentfulPages.title} src = {"https://maps.google.com/maps?q="+data.contentfulPages.location.lat+","+data.contentfulPages.location.lon+"&hl=es;z=14&output=embed" }></iframe>
   </div>
 )
 
@@ -12,6 +12,7 @@ export default props => (
     query={graphql`
       query {
         contentfulPages {
+          title
           location {
             lon
             lat
