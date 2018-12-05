@@ -801,3 +801,22 @@ ul.blog-post li p {
   border: 0;
   min-height: 350px;
 }
+
+.blogdetails {
+  padding-top: 30px;
+}
+
+.contactform {
+  padding-bottom: 40px;
+}
+
+footer {
+  display: inline-block !important;
+    width: 100%;
+    background: #f9f9ff;
+    padding: 35px 0;
+}
+
+footer p {
+  margin: 0;
+}

@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import { graphql } from 'gatsby';
-import Header from '../pages/header';
-import Helmet from 'react-helmet';
+import React, { Component} from 'react'
+import PropTypes from 'prop-types'
+import Helmet from 'react-helmet'
+import Layout from '../components/layout'
 
 class InnerPage extends Component {
     render() {
@@ -11,8 +11,8 @@ class InnerPage extends Component {
           heroImage
         } = this.props.data.contentfulPages
         return (
+          <Layout>
         <div className="innerpage">
-          <Header />
           <div className="bannerImg">
             <img src={heroImage.file.url} alt={heroImage.file.fileName} />
           </div>
@@ -23,9 +23,16 @@ class InnerPage extends Component {
             <div dangerouslySetInnerHTML={{__html: body.childMarkdownRemark.html}} />
           </div>
         </div>
+        </Layout>
         );
     }
 }
+
+InnerPage.propTypes = {
+  data: PropTypes.object.isRequired
+}
+
+export default InnerPage
 
 export const query = graphql`
   query pagesPostQuery($slug: String!){
@@ -48,5 +55,3 @@ export const query = graphql`
     }
   }
 `
-
-export default InnerPage

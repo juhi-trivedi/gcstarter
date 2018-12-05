@@ -1,6 +1,6 @@
 header {
     padding: 25px 0;
-    display: inline-block;
+    display: inline-block !important;
     width: 100%;
     background: #f9f9ff;
     vertical-align: top;

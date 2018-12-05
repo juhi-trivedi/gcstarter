@@ -3,8 +3,9 @@ import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
 import { StaticQuery, graphql } from 'gatsby'
 
+import Header from './header'
+import Footer from './Footer'
 import './layout.css'
-import Header from '../pages/header'
 
 const Layout = ({ children }) => (
   <StaticQuery
@@ -15,7 +16,15 @@ const Layout = ({ children }) => (
             title
           }
         }
-      }
+        allContentfulPages {
+          edges {
+            node {
+              title
+              slug
+            }
+          }
+        }
+      } 
     `}
     render={data => (
       <>
@@ -28,10 +37,9 @@ const Layout = ({ children }) => (
         >
           <html lang="en" />
         </Helmet>
-        <Header />
-        <div className="container">
-          {children}
-        </div>
+        <Header data={data} />
+        {children}
+        <Footer />
       </>
     )}
   />

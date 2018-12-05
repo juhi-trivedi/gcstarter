@@ -12,8 +12,10 @@ class BlogPost extends Component {
     return (
       <Layout>
         <Helmet title={`${title}`} />
-        <h1>{title}</h1>
-        <div dangerouslySetInnerHTML={{__html: body.childMarkdownRemark.html}} />
+        <div className="container blogdetails">
+          <h1>{title}</h1>
+          <div dangerouslySetInnerHTML={{__html: body.childMarkdownRemark.html}} />
+        </div>
       </Layout>
     )
   }

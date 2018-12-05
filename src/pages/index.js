@@ -1,8 +1,10 @@
-import React from 'react'
-import { Link, graphql } from 'gatsby'
-import Layout from '../components/layout'
-import HeadText from './headText'
-import '../components/layout.css'
+import React from 'react';
+import { Link, graphql } from 'gatsby';
+import Layout from '../components/layout';
+import HeadText from '../components/headText';
+import '../components/layout.css';
+import '../components/header.css';
+
 
 const BlogPost = ({node}) => {
   return (
@@ -16,14 +18,17 @@ const BlogPost = ({node}) => {
   )
 }
 
-
 const IndexPage = ({data}) => (
+  <div className="mainparent"> 
     <Layout>
+      <div className="container">
       <HeadText />
       <ul className="blog-post">
         {data.allContentfulBlog.edges.map((edge) => <BlogPost node={edge.node} key={Math.random()} />)}
       </ul>
+      </div>
     </Layout>
+    </div>
 )
 
 export default IndexPage
@@ -45,6 +50,14 @@ export const pageQuery = graphql`
               src
             }
           }
+        }
+      }
+    }
+    allContentfulPages {
+      edges {
+        node {
+          title
+          slug
         }
       }
     }
