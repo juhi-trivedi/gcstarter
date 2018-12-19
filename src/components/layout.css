@@ -2,9 +2,11 @@ html {
   font-family: sans-serif;
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
+  min-height: 100%;
 }
 body {
   margin: 0;
+  min-height: 100%;
 }
 article,
 aside,
@@ -721,7 +723,7 @@ ul.blog-post li p {
   min-width: 100px;
 }
 
-.contactform form input, .contactform form textarea {
+.contactform form input, .contactform form textarea, .signinpage form input {
   padding: 0.375rem 0.75rem;
   font-size: 1rem;
   line-height: 1.5;
@@ -740,7 +742,7 @@ ul.blog-post li p {
   min-height: 150px;
 }
 
-.contactform form button, .thankyoupage a, .contactform form input[type="submit"] {
+.contactform form button, .thankyoupage a, .contactform form input[type="submit"], .signinpage form button {
   display: inline-block;
   outline: none;
   line-height: 40px;
@@ -819,4 +821,83 @@ footer {
 
 footer p {
   margin: 0;
+}
+
+.signinpage form button {
+  float: none;
+}
+
+.signinpage form input {
+  width: 100%;
+    margin-bottom: 25px;
+}
+
+.signinpage h1 {
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-size: 34px;
+  position: relative;
+  border-bottom: 1px solid #8490ff;
+  padding-bottom: 22px;
+  box-shadow: 0 8px 6px -6px #8490ffa6;
+  margin-bottom: 45px;
+  padding-top: 5px;
+}
+
+.signinpage {
+  max-width: 600px;
+  margin: 50px auto;
+  box-shadow: 0px 0px 6px #c1c1c1;
+  padding: 30px 50px;
+  text-align: center;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
+
+.forgotpwd_link {
+  margin-bottom: 12px;
+}
+
+.signinpage a {
+  text-decoration: none;
+  color: #8490ff;
+  font-size: 16px;
+  letter-spacing: 0.5px;
+}
+
+.signinpage a:hover {
+  text-decoration: underline;
+}
+
+.signup_link {
+  margin-bottom: 10px;
+}
+
+.signup_error {
+  margin-top: 15px;
+  color: red;
+}
+
+.landingpage {
+  background-image: url(../images/bg-personal.jpg);
+  background-position: top left;
+  background-size: cover;
+  min-height: calc(100vh - 194px);
+  display: flex;
+  align-items: center;
+  text-align: center;
+}
+.landingpage h1{
+  line-height: normal
+}
+
+.landingpage .signinlink {
+  background: linear-gradient(0deg, #8490ff 0%, #62bdfc 100%);
+  background-color: #8490ff;
+  color: #fff;
+  padding: 10px 30px;
+  display: inline-block;
+  text-decoration: none;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  text-transform: uppercase;
+  font-weight: 500;
 }

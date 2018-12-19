@@ -1,11 +1,11 @@
-import React from 'react';
-import { StaticQuery, Link, graphql } from 'gatsby'
-import Layout from '../components/layout';
-import '../components/layout.css';
-import '../components/header.css';
+import React, { Component } from 'react';
 
-import * as routes from '../constants/routes';
-import AuthUserContext from '../components/Session/AuthUserContext';
+import Layout from '../components/layout';
+import withAuthorization from '../components/Session/withAuthorization';
+
+import { StaticQuery, Link, graphql } from 'gatsby';
+import HeadText from '../components/headText';
+
 
 
 const BlogPost = ({ node }) => {
@@ -20,10 +20,10 @@ const BlogPost = ({ node }) => {
   )
 }
 
-const BlogData = () => (
+const BlogListData = ({ data }) => (
   <StaticQuery
     query={graphql`
-      query pagesQuery {
+      query pagesListQuery {
         allContentfulBlog(filter: {node_locale: {eq: "en-US"}}, sort: {fields: [publishDate], order: DESC}) {
           edges {
             node {
@@ -63,36 +63,24 @@ const BlogData = () => (
 )
 
 
-const IndexPage = () => (
-    <AuthUserContext.Consumer>
-      {authUser =>
-        authUser ? <LoggedIn /> : <LoggedOut />
-      }
-    </AuthUserContext.Consumer>
-  );
-
-const LoggedIn = ({ data }) => (
-  <div className="mainparent"> 
-    <div className="container">
-      <BlogData />
-    </div>
-  </div>
-);
-
-
-const LoggedOut = () => {
-  return (
-  <div className="mainparent"> 
-    <Layout>
-      <div className="landingpage">
+class HomePageBase extends Component {
+  render() {
+    return (
+      <React.Fragment>
         <div className="container">
-          <h1> Welcome To<br/>Gatsby + Contentful + Firebase Demo </h1>
-          <Link to={routes.SIGN_IN} className="signinlink">Sign In</Link>
+          <HeadText />
+          <BlogListData />
         </div>
-      </div>
-    </Layout>
-    </div>
-  )
-};
+      </React.Fragment>
+    );
+  }
+}
+const authCondition = authUser => !!authUser;
 
-export default IndexPage
+const HomePage = withAuthorization(authCondition)(HomePageBase);
+
+export default () => (
+  <Layout>
+    <HomePage />
+  </Layout>
+);

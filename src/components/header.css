@@ -27,7 +27,7 @@ header ul.menulist li {
     display: inline-block;
 }
 
-header ul.menulist li a {
+header ul.menulist li a, header ul.menulist li button {
     font-family: Open Sans, sans-serif;
     padding: 0 15px;
     text-decoration: none;
@@ -37,6 +37,7 @@ header ul.menulist li a {
     font-size: 14px;
     text-transform: uppercase;
     outline: none;
+    background: transparent
 }
 
 header ul.menulist li:last-of-type a {
