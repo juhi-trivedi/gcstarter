@@ -723,7 +723,7 @@ ul.blog-post li p {
   min-width: 100px;
 }
 
-.contactform form input, .contactform form textarea, .signinpage form input {
+.contactform form input, .contactform form textarea, .signinpage form input, .pwdforgot input[type="text"] {
   padding: 0.375rem 0.75rem;
   font-size: 1rem;
   line-height: 1.5;
@@ -742,7 +742,7 @@ ul.blog-post li p {
   min-height: 150px;
 }
 
-.contactform form button, .thankyoupage a, .contactform form input[type="submit"], .signinpage form button {
+.contactform form button, .thankyoupage a, .contactform form input[type="submit"], .signinpage form button, .pwdforgot button {
   display: inline-block;
   outline: none;
   line-height: 40px;
@@ -763,9 +763,10 @@ ul.blog-post li p {
   text-transform: uppercase !important;
   font-family: Open Sans, sans-serif;
   float: right;
+  cursor: pointer;
 }
 
-.contactform form button:hover, .thankyoupage a:hover, .contactform form input[type="submit"]:hover {
+.contactform form button:hover, .thankyoupage a:hover, .contactform form input[type="submit"]:hover, .pwdforgot button:hover {
   border: 1px solid #8490ff;
   color: #8490ff !important;
   background-color: #fff;

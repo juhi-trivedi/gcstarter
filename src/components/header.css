@@ -37,7 +37,9 @@ header ul.menulist li a, header ul.menulist li button {
     font-size: 14px;
     text-transform: uppercase;
     outline: none;
-    background: transparent
+    background: transparent;
+    border: 0;
+    cursor: pointer;
 }
 
 header ul.menulist li:last-of-type a {

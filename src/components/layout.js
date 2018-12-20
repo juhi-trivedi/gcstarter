@@ -10,7 +10,7 @@ import getFirebase from './Firebase';
 import FirebaseContext from './Firebase/FirebaseContext';
 import withAuthentication from './Session/withAuthentication';
 
-import Navigation from '../components/Header'
+import Navigation from './Header'
 
 const MainLayOut = ({ children }) => (
   <StaticQuery
