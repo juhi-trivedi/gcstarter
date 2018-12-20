@@ -8,7 +8,7 @@ import Logo from '../images/logo.png';
 import './header.css'
 
 
-const Navigation = ({data}) => (
+const Header = ({data}) => (
   <header>
       <div className="container">
           <div className="logo">
@@ -75,4 +75,4 @@ const NavigationNonAuth = () => (
 );
   
 
-export default Navigation;
+export default Header;

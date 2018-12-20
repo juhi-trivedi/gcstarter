@@ -3,14 +3,12 @@ import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
 import { StaticQuery, graphql } from 'gatsby'
 
-// import Header from './header'
 import Footer from './Footer'
 import './layout.css'
 import getFirebase from './Firebase';
 import FirebaseContext from './Firebase/FirebaseContext';
 import withAuthentication from './Session/withAuthentication';
-
-import Navigation from './Header'
+import Header from './Header';
 
 const MainLayOut = ({ children }) => (
   <StaticQuery
@@ -79,7 +77,7 @@ class Layout extends Component {
 
 const AppWithAuthentication = withAuthentication(props => (
   <Fragment>    
-    <Navigation />
+    <Header />
     {props.children}
     <Footer />
   </Fragment>
