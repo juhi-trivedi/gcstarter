@@ -24,7 +24,7 @@ class SignInForm extends Component {
       .doSignInWithEmailAndPassword(email, password)
       .then(() => {
         this.setState(() => ({ ...INITIAL_STATE }));
-        navigate(routes.HOME);
+        navigate(routes.LANDING);
       })
       .catch(error => {
         this.setState({ error });

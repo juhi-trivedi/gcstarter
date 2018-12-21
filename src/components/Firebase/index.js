@@ -89,7 +89,7 @@ function getFirebase(app, auth, database) {
   if (!firebase) {
     firebase = new Firebase(app, auth, database);
   }
-
+  
   return firebase;
 }
 

@@ -5,7 +5,7 @@ import * as routes from '../constants/routes';
 import AuthUserContext from './Session/AuthUserContext';
 import SignOutButton from './SignOut';
 import Logo from '../images/logo.png';
-import './header.css'
+import './header.css';
 
 
 const Navigation = ({data}) => (
@@ -44,11 +44,11 @@ const NavigationAuth = ({data}) => (
         <>
             <ul className="menulist">
                 <li>
-                    <Link to="/"> Home </Link>
+                    <Link to={routes.HOME}> Blogs </Link>
                 </li>
                 {data.allContentfulPages.edges.map(({node}) => ( 
                 <li>
-                        <Link to={node.slug} key={Math.random()}> {node.title} </Link>
+                    <Link to={node.slug} key={Math.random()}> {node.title} </Link>
                 </li>
                 ))}
                 <li>
@@ -66,10 +66,7 @@ const NavigationAuth = ({data}) => (
 const NavigationNonAuth = () => (
   <ul className="menulist">
     <li>
-      <Link to={routes.LANDING}>Landing</Link>
-    </li>
-    <li>
-      <Link to={routes.SIGN_IN}>Sign In</Link>
+      <Link to={routes.SIGN_UP}>New User?</Link>
     </li>
   </ul>
 );

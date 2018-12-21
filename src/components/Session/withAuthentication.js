@@ -35,6 +35,11 @@ const withAuthentication = Component => {
       this.firebaseInit();
     }
 
+    componentWillUnmount() {
+      this.firebaseInit();
+      console.log('unmount withAuthentication');
+    }
+
     render() {
       const { authUser } = this.state;
 

@@ -36,6 +36,12 @@ const withAuthorization = condition => Component => {
       this.firebaseInit();
     }
 
+    componentWillUnmount() {
+      this.firebaseInit();
+      console.log('unmount withAuthorization');
+    }
+
+
     render() {
       return (
         <AuthUserContext.Consumer>
