@@ -9,6 +9,7 @@ import FirebaseContext from './Firebase/FirebaseContext';
 import withAuthentication from './Session/withAuthentication';
 import Navigation from './header';
 
+
 const MainLayOut = ({ children }) => (
   <StaticQuery
     query={graphql`
