@@ -44,7 +44,7 @@ const SignInAuth = withAuthentication(props => (
   <Fragment>    
     <AuthUserContext.Consumer>
     {authUser =>
-      authUser ? navigate(routes.LANDING) : <div className="container signinpage"> <h1>Log In</h1> <SignInForm /> <PasswordForgetLink /> <SignUpLink /> </div>
+      authUser ? navigate(routes.LANDING) : <Layout><div className="container signinpage"> <h1>Log In</h1> <SignInForm /> <PasswordForgetLink /> <SignUpLink /> </div></Layout>
     }
   </AuthUserContext.Consumer>
   </Fragment>
