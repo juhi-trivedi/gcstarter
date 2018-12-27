@@ -11,7 +11,7 @@ export class SignUpPage extends Component {
     return (
       <AuthUserContext.Consumer>
       {authUser =>
-        authUser ? navigate(routes.LANDING) : <div className="container signinpage"> <h1>Log In</h1> <SignUpForm /> </div> 
+        authUser ? navigate(routes.LANDING) : <div className="container signinpage"> <h1>Sign Up</h1> <SignUpForm /> </div> 
       }
       </AuthUserContext.Consumer>
     )
