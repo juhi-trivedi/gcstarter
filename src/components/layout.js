@@ -74,7 +74,6 @@ class Layout extends Component {
   }
 }
 
-
 const AppWithAuthentication = withAuthentication(props => (
   <Fragment>    
     <Navigation />

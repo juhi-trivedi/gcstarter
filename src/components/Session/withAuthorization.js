@@ -8,7 +8,6 @@ import { withFirebase } from '../Firebase/FirebaseContext'
 const withAuthorization = condition => Component => {
   class WithAuthorization extends React.Component {
     _initFirebase = false
-
     firebaseInit = () => {
       if (this.props.firebase && !this._initFirebase) {
         this._initFirebase = true

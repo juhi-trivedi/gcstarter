@@ -1,5 +1,4 @@
 import React from 'react'
-
 import { withFirebase } from '../Firebase/FirebaseContext'
 
 const SignOutButton = ({ firebase }) => (

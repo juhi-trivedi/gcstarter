@@ -62,7 +62,6 @@ const BlogListData = ({ data }) => (
     )}
   />
 )
-
 class HomePageBase extends Component {
   render() {
     return (

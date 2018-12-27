@@ -12,7 +12,6 @@ const INITIAL_STATE = {
   passwordTwo: '',
   error: null,
 };
-
 class SignUpForm extends Component {
   constructor(props) {
     super(props);

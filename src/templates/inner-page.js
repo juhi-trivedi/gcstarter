@@ -24,7 +24,6 @@ const InnerPageContent = ({ data }) => (
     </div>
   </div>
 )
-
 class InnerContentPage extends Component {
   render() {
     return (
@@ -36,7 +35,6 @@ class InnerContentPage extends Component {
 }
 
 const authCondition = authUser => !!authUser
-
 const NewContentFulPage = withAuthorization(authCondition)(InnerContentPage)
 class InnerPage extends Component {
   render() {

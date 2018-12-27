@@ -39,7 +39,6 @@ const withAuthentication = Component => {
       this.setState({
         authUser: JSON.parse(localStorage.getItem('authUser')),
       });
-
       this.firebaseInit();
     }
 
