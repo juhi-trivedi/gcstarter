@@ -47,7 +47,7 @@ const NavigationAuth = ({data}) => (
                     <Link to={routes.HOME}> Blogs </Link>
                 </li>
                 {data.allContentfulPages.edges.map(({node}) => ( 
-                <li>
+                <li key={Math.random()}>
                     <Link to={node.slug} key={Math.random()}> {node.title} </Link>
                 </li>
                 ))}
