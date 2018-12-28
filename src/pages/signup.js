@@ -5,7 +5,6 @@ import SignUpForm from '../components/SignUp';
 import { navigate } from 'gatsby';
 import * as routes from '../constants/routes';
 import AuthUserContext from '../components/Session/AuthUserContext';
-
 export class SignUpPage extends Component {
   render() {
     return (

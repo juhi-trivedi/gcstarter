@@ -1,12 +1,8 @@
-import React, { Component } from 'react';
-
-import Layout from '../components/layout';
-import withAuthorization from '../components/Session/withAuthorization';
-
-import { StaticQuery, Link, graphql } from 'gatsby';
-import HeadText from '../components/headText';
-
-
+import React, { Component } from 'react'
+import Layout from '../components/layout'
+import withAuthorization from '../components/Session/withAuthorization'
+import { StaticQuery, Link, graphql } from 'gatsby'
+import HeadText from '../components/headText'
 
 const BlogPost = ({ node }) => {
   return (
@@ -24,7 +20,10 @@ const BlogListData = ({ data }) => (
   <StaticQuery
     query={graphql`
       query pagesListQuery {
-        allContentfulBlog(filter: {node_locale: {eq: "en-US"}}, sort: {fields: [publishDate], order: DESC}) {
+        allContentfulBlog(
+          filter: { node_locale: { eq: "en-US" } }
+          sort: { fields: [publishDate], order: DESC }
+        ) {
           edges {
             node {
               title
@@ -50,19 +49,19 @@ const BlogListData = ({ data }) => (
             }
           }
         }
-      }   
+      }
     `}
     render={data => (
       <>
         <ul className="blog-post">
-          {data.allContentfulBlog.edges.map((edge) => <BlogPost node={edge.node} key={Math.random()} />)}
+          {data.allContentfulBlog.edges.map(edge => (
+            <BlogPost node={edge.node} key={Math.random()} />
+          ))}
         </ul>
       </>
     )}
   />
 )
-
-
 class HomePageBase extends Component {
   render() {
     return (
@@ -72,15 +71,14 @@ class HomePageBase extends Component {
           <BlogListData />
         </div>
       </React.Fragment>
-    );
+    )
   }
 }
-const authCondition = authUser => !!authUser;
+const authCondition = authUser => !!authUser
 
-const HomePage = withAuthorization(authCondition)(HomePageBase);
-
+const HomePage = withAuthorization(authCondition)(HomePageBase)
 export default () => (
   <Layout>
     <HomePage />
   </Layout>
-);
+)

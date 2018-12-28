@@ -5,29 +5,40 @@ import { withFirebase } from '../Firebase/FirebaseContext';
 
 const withAuthentication = Component => {
   class WithAuthentication extends React.Component {
+    _initFirebase = false;
+
     constructor(props) {
       super(props);
 
       this.state = {
-        initFirebase: false,
         authUser: null,
       };
     }
 
     firebaseInit = () => {
-      if (this.props.firebase && !this.state.initFirebase) {
-        this.props.firebase.auth.onAuthStateChanged(authUser => {
-          authUser
-            ? this.setState(() => ({ authUser, initFirebase: true }))
-            : this.setState(() => ({
-                authUser: null,
-                initFirebase: true,
-              }));
-        });
+      if (this.props.firebase && !this._initFirebase) {
+        this._initFirebase = true;
+
+        this.listener = this.props.firebase.onAuthUserListener(
+          authUser => {
+            localStorage.setItem(
+              'authUser',
+              JSON.stringify(authUser),
+            );
+            this.setState({ authUser });
+          },
+          () => {
+            localStorage.removeItem('authUser');
+            this.setState({ authUser: null });
+          },
+        );
       }
     };
 
     componentDidMount() {
+      this.setState({
+        authUser: JSON.parse(localStorage.getItem('authUser')),
+      });
       this.firebaseInit();
     }
 
@@ -36,15 +47,12 @@ const withAuthentication = Component => {
     }
 
     componentWillUnmount() {
-      this.firebaseInit();
-      console.log('unmount withAuthentication');
+      this.listener && this.listener();
     }
 
     render() {
-      const { authUser } = this.state;
-
       return (
-        <AuthUserContext.Provider value={authUser}>
+        <AuthUserContext.Provider value={this.state.authUser}>
           <Component {...this.props} />
         </AuthUserContext.Provider>
       );

@@ -9,7 +9,6 @@ const INITIAL_STATE = {
   password: '',
   error: null,
 };
-
 class SignInForm extends Component {
   constructor(props) {
     super(props);
@@ -62,7 +61,7 @@ class SignInForm extends Component {
           Sign In
         </button>
 
-        {error && <p>{error.message}</p>}
+        {error && <p className="errorClass">{error.message}</p>}
       </form>
     );
   }
