@@ -23,7 +23,6 @@ const withAuthorization = condition => Component => {
             navigate(routes.SIGN_IN);
           }
         });
-
         this.setState({ initFirebase: true });
       }
     };
@@ -38,9 +37,7 @@ const withAuthorization = condition => Component => {
 
     componentWillUnmount() {
       this.firebaseInit();
-      console.log('unmount withAuthorization');
     }
-
 
     render() {
       return (
