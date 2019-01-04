@@ -15,7 +15,7 @@ const withAuthentication = Component => {
       this.state = {
         authUser: null,
       }
-      this.props.onSetAuthUser(JSON.parse(localStorage.getItem('authUser')))
+      // this.props.onSetAuthUser(JSON.parse(localStorage.getItem('authUser')))
     }
 
     firebaseInit = () => {
