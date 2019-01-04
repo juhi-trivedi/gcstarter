@@ -60,20 +60,20 @@ class InnerPage extends Component {
     }
   }
   componentDidMount() {
-    this.setState({ route: navigate('/') })
+    //this.setState({ route: navigate('/') })
   }
   render() {
     const saveData = cookie.load('authUser')
     return (
-      <Fragment>
-        {saveData ? (
+      // <Fragment>
+      //   {saveData ? (
           <Layout>
             <NewContentFulPage data={this.props.data} />
           </Layout>
-        ) : (
-          this.state.route
-        )}
-      </Fragment>
+      //   ) : (
+      //     this.state.route
+      //   )}
+      // </Fragment>
     )
   }
 }
