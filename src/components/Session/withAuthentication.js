@@ -4,6 +4,7 @@ import { compose } from 'recompose'
 import * as Actions from '../../actions/action'
 import AuthUserContext from './AuthUserContext'
 import { withFirebase } from '../Firebase/FirebaseContext'
+import cookie from 'react-cookies'
 
 const withAuthentication = Component => {
   class WithAuthentication extends React.Component {
@@ -15,7 +16,7 @@ const withAuthentication = Component => {
       this.state = {
         authUser: null,
       }
-      this.props.onSetAuthUser(JSON.parse(localStorage.getItem('authUser')))
+      this.props.onSetAuthUser(cookie.load('authUser'))
     }
 
     firebaseInit = () => {
@@ -24,12 +25,13 @@ const withAuthentication = Component => {
 
         this.listener = this.props.firebase.onAuthUserListener(
           authUser => {
-            localStorage.setItem('authUser', JSON.stringify(authUser))
+            //localStorage.setItem('authUser', JSON.stringify(authUser))
+            cookie.save('authUser', authUser, { path: '/' })
             this.setState({ authUser })
             this.props.onSetAuthUser(authUser)
           },
           () => {
-            localStorage.removeItem('authUser')
+            cookie.remove('authUser')
             this.setState({ authUser: null })
             this.props.onSetAuthUser(null)
           }
@@ -39,7 +41,7 @@ const withAuthentication = Component => {
 
     componentDidMount() {
       this.setState({
-        authUser: JSON.parse(localStorage.getItem('authUser')),
+        authUser: cookie.load('authUser'),
       })
       this.firebaseInit()
     }
