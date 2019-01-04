@@ -1,9 +1,12 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
+import { navigate } from 'gatsby'
 import Layout from '../components/layout'
 import withAuthorization from '../components/Session/withAuthorization'
-
+import { connect } from 'react-redux'
+import { compose } from 'recompose'
+import cookie from 'react-cookies'
 const InnerPageContent = ({ data }) => (
   <div className="innerpage">
     <div className="bannerImg">
@@ -35,13 +38,31 @@ class InnerContentPage extends Component {
 }
 
 const authCondition = authUser => !!authUser
-const NewContentFulPage = withAuthorization(authCondition)(InnerContentPage)
+const mapStateToProps = state => {
+  return {
+    users: state,
+  }
+}
+const NewContentFulPage = compose(
+  connect(
+    mapStateToProps,
+    null
+  ),
+  withAuthorization(authCondition)
+)(InnerContentPage)
 class InnerPage extends Component {
   render() {
+    const saveData = cookie.load('authUser')
     return (
-      <Layout>
-        <NewContentFulPage data={this.props.data} />
-      </Layout>
+      <Fragment>
+        {saveData ? (
+          <Layout>
+            <NewContentFulPage data={this.props.data} />
+          </Layout>
+        ) : (
+          navigate('/')
+        )}
+      </Fragment>
     )
   }
 }

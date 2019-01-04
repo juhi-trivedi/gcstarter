@@ -1,8 +1,11 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import Layout from '../components/layout'
 import Map from '../components/Map'
 import withAuthorization from '../components/Session/withAuthorization'
-
+import { connect } from 'react-redux'
+import { compose } from 'recompose'
+import cookie from 'react-cookies'
+import { navigate } from 'gatsby'
 // const Contact = () => (
 
 class ContactForm extends Component {
@@ -42,8 +45,18 @@ class ContactForm extends Component {
 }
 
 const authCondition = authUser => !!authUser
-
-const ContactPage = withAuthorization(authCondition)(ContactForm)
+const mapStateToProps = state => {
+  return {
+    users: state,
+  }
+}
+const ContactPage = compose(
+  connect(
+    mapStateToProps,
+    null
+  ),
+  withAuthorization(authCondition)
+)(ContactForm)
 
 // export default () => (
 //   <Layout>
@@ -51,14 +64,21 @@ const ContactPage = withAuthorization(authCondition)(ContactForm)
 //   </Layout>
 // )
 
-class Contact extends Component{
-  render(){
-    return(
-      <Layout>
-        <ContactPage/>
-      </Layout>
+class Contact extends Component {
+  render() {
+    const saveData = cookie.load('authUser')
+    return (
+      <Fragment>
+        {saveData ? (
+          <Layout>
+            <ContactPage />
+          </Layout>
+        ) : (
+          navigate('/')
+        )}
+      </Fragment>
     )
   }
 }
 
-export default Contact;
+export default Contact

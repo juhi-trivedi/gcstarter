@@ -68,9 +68,3 @@ export default compose(
   ),
   withAuthentication
 )(SignInPage)
-
-// export default () => (
-//   <Layout>
-//     <SignInPage />
-//   </Layout>
-// );

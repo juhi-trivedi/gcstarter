@@ -1,10 +1,12 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
+import { navigate } from 'gatsby'
 import Layout from '../components/layout'
 import withAuthorization from '../components/Session/withAuthorization'
 import { StaticQuery, Link, graphql } from 'gatsby'
 import HeadText from '../components/headText'
 import { connect } from 'react-redux'
 import { compose } from 'recompose'
+import cookie from 'react-cookies'
 
 const BlogPost = ({ node }) => {
   return (
@@ -68,10 +70,14 @@ class HomePageBase extends Component {
   render() {
     return (
       <React.Fragment>
-        <div className="container">
-          <HeadText />
-          <BlogListData />
-        </div>
+        {this.props.users.sessionReducer.authUser ? (
+          <div className="container">
+            <HeadText />
+            <BlogListData />
+          </div>
+        ) : (
+          navigate('/')
+        )}
       </React.Fragment>
     )
   }
@@ -79,7 +85,6 @@ class HomePageBase extends Component {
 const authCondition = authUser => !!authUser
 
 const mapStateToProps = state => {
-  console.log('state', state)
   return {
     users: state,
   }
@@ -92,8 +97,20 @@ const HomePage = compose(
   ),
   withAuthorization(authCondition)
 )(HomePageBase)
-export default () => (
-  <Layout>
-    <HomePage />
-  </Layout>
-)
+class Home extends Component {
+  render() {
+    const saveData = cookie.load('authUser')
+    return (
+      <Fragment>
+        {saveData ? (
+          <Layout>
+            <HomePage />
+          </Layout>
+        ) : (
+          navigate('/')
+        )}
+      </Fragment>
+    )
+  }
+}
+export default () => <Home />
