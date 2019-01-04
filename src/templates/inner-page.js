@@ -7,6 +7,8 @@ import withAuthorization from '../components/Session/withAuthorization'
 import { connect } from 'react-redux'
 import { compose } from 'recompose'
 import cookie from 'react-cookies'
+import * as routes from '../constants/routes'
+
 const InnerPageContent = ({ data }) => (
   <div className="innerpage">
     <div className="bannerImg">
@@ -51,6 +53,15 @@ const NewContentFulPage = compose(
   withAuthorization(authCondition)
 )(InnerContentPage)
 class InnerPage extends Component {
+  constructor() {
+    super()
+    this.state = {
+      route: '',
+    }
+  }
+  componentDidMount() {
+    this.setState({ route: navigate('/') })
+  }
   render() {
     const saveData = cookie.load('authUser')
     return (
@@ -60,7 +71,7 @@ class InnerPage extends Component {
             <NewContentFulPage data={this.props.data} />
           </Layout>
         ) : (
-          navigate('/')
+          this.state.route
         )}
       </Fragment>
     )
