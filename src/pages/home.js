@@ -98,6 +98,15 @@ const HomePage = compose(
   withAuthorization(authCondition)
 )(HomePageBase)
 class Home extends Component {
+  constructor() {
+    super()
+    this.state = {
+      route: '',
+    }
+  }
+  componentDidMount() {
+    this.setState({ route: navigate('/') })
+  }
   render() {
     const saveData = cookie.load('authUser')
     return (
@@ -107,7 +116,7 @@ class Home extends Component {
             <HomePage />
           </Layout>
         ) : (
-          navigate('/')
+          this.state.route
         )}
       </Fragment>
     )

@@ -65,6 +65,15 @@ const ContactPage = compose(
 // )
 
 class Contact extends Component {
+  constructor() {
+    super()
+    this.state = {
+      route: '',
+    }
+  }
+  componentDidMount() {
+    this.setState({ route: navigate('/') })
+  }
   render() {
     const saveData = cookie.load('authUser')
     return (
@@ -74,7 +83,7 @@ class Contact extends Component {
             <ContactPage />
           </Layout>
         ) : (
-          navigate('/')
+          this.state.route
         )}
       </Fragment>
     )
