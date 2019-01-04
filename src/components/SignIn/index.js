@@ -1,41 +1,40 @@
-import React, { Component } from 'react';
-import { navigate } from 'gatsby';
+import React, { Component } from 'react'
+import { navigate } from 'gatsby'
 
-import * as routes from '../../constants/routes';
-import { withFirebase } from '../Firebase/FirebaseContext';
+import * as routes from '../../constants/routes'
+import { withFirebase } from '../Firebase/FirebaseContext'
 
 const INITIAL_STATE = {
   email: '',
   password: '',
   error: null,
-};
+}
 class SignInForm extends Component {
   constructor(props) {
-    super(props);
-
-    this.state = { ...INITIAL_STATE };
+    super(props)
+    this.state = { ...INITIAL_STATE }
   }
 
   onSubmit = event => {
-    const { email, password } = this.state;
+    const { email, password } = this.state
 
     this.props.firebase
       .doSignInWithEmailAndPassword(email, password)
       .then(() => {
-        this.setState(() => ({ ...INITIAL_STATE }));
-        navigate(routes.LANDING);
+        this.setState(() => ({ ...INITIAL_STATE }))
+        navigate(routes.LANDING)
       })
       .catch(error => {
-        this.setState({ error });
-      });
+        this.setState({ error })
+      })
 
-    event.preventDefault();
-  };
+    event.preventDefault()
+  }
 
   render() {
-    const { email, password, error } = this.state;
+    const { email, password, error } = this.state
 
-    const isInvalid = password === '' || email === '';
+    const isInvalid = password === '' || email === ''
 
     return (
       <form onSubmit={this.onSubmit}>
@@ -63,8 +62,8 @@ class SignInForm extends Component {
 
         {error && <p className="errorClass">{error.message}</p>}
       </form>
-    );
+    )
   }
 }
 
-export default withFirebase(SignInForm);
+export default (withFirebase(SignInForm))

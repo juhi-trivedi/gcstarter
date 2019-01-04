@@ -1,5 +1,7 @@
 import React from 'react'
 import { navigate } from 'gatsby'
+import { connect } from 'react-redux'
+import { compose } from 'recompose'
 
 import * as routes from '../../constants/routes'
 import AuthUserContext from '../Session/AuthUserContext'
@@ -46,7 +48,15 @@ const withAuthorization = condition => Component => {
     }
   }
 
-  return withFirebase(WithAuthorization)
+  const mapStateToProps = state => {
+    return{
+    authUser: state.sessionReducer.authUser,
+  }}
+
+  return compose(
+    withFirebase,
+    connect(mapStateToProps)
+  )(WithAuthorization)
 }
 
 export default withAuthorization

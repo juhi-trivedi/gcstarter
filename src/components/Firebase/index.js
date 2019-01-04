@@ -1,3 +1,4 @@
+
 const config = {
   apiKey: 'AIzaSyB_EC4kekLVlRJS5Xq3uZXgZEd9_x36PvA',
   authDomain: 'gcstarter01.firebaseapp.com',

@@ -3,6 +3,8 @@ import Layout from '../components/layout'
 import withAuthorization from '../components/Session/withAuthorization'
 import { StaticQuery, Link, graphql } from 'gatsby'
 import HeadText from '../components/headText'
+import { connect } from 'react-redux'
+import { compose } from 'recompose'
 
 const BlogPost = ({ node }) => {
   return (
@@ -76,7 +78,20 @@ class HomePageBase extends Component {
 }
 const authCondition = authUser => !!authUser
 
-const HomePage = withAuthorization(authCondition)(HomePageBase)
+const mapStateToProps = state => {
+  console.log('state', state)
+  return {
+    users: state,
+  }
+}
+
+const HomePage = compose(
+  connect(
+    mapStateToProps,
+    null
+  ),
+  withAuthorization(authCondition)
+)(HomePageBase)
 export default () => (
   <Layout>
     <HomePage />

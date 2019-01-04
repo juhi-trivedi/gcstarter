@@ -1,14 +1,13 @@
-import React, { Component, Fragment } from 'react';
-import PropTypes from 'prop-types';
-import Helmet from 'react-helmet';
-import { StaticQuery, graphql } from 'gatsby';
-import Footer from './Footer';
-import './layout.css';
-import getFirebase from './Firebase';
-import FirebaseContext from './Firebase/FirebaseContext';
-import withAuthentication from './Session/withAuthentication';
-import Navigation from './header';
-
+import React, { Component, Fragment } from 'react'
+import PropTypes from 'prop-types'
+import Helmet from 'react-helmet'
+import { StaticQuery, graphql } from 'gatsby'
+import Footer from './Footer'
+import './layout.css'
+import getFirebase from './Firebase'
+import FirebaseContext from './Firebase/FirebaseContext'
+import withAuthentication from './Session/withAuthentication'
+import Navigation from './header'
 
 const MainLayOut = ({ children }) => (
   <StaticQuery
@@ -27,7 +26,7 @@ const MainLayOut = ({ children }) => (
             }
           }
         }
-      } 
+      }
     `}
     render={data => (
       <>
@@ -49,18 +48,18 @@ const MainLayOut = ({ children }) => (
 class Layout extends Component {
   state = {
     firebase: null,
-  };
+  }
 
   componentDidMount() {
-    const app = import('firebase/app');
-    const auth = import('firebase/auth');
-    const database = import('firebase/database');
+    const app = import('firebase/app')
+    const auth = import('firebase/auth')
+    const database = import('firebase/database')
 
     Promise.all([app, auth, database]).then(values => {
-      const firebase = getFirebase(values[0]);
+      const firebase = getFirebase(values[0])
 
-      this.setState({ firebase });
-    });
+      this.setState({ firebase, loginSuccess: this.props.loginSuccess })
+    })
   }
 
   render() {
@@ -70,22 +69,20 @@ class Layout extends Component {
           <AppWithAuthentication {...this.props} />
         </FirebaseContext.Provider>
       </MainLayOut>
-    );
+    )
   }
 }
 
 const AppWithAuthentication = withAuthentication(props => (
-  <Fragment>    
+  <Fragment>
     <Navigation />
     {props.children}
     <Footer />
   </Fragment>
-));
-
+))
 
 Layout.propTypes = {
   children: PropTypes.node.isRequired,
 }
 
-
-export default Layout
+export default (Layout)
