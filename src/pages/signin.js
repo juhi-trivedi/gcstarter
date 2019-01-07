@@ -19,16 +19,8 @@ class SignInPage extends Component {
     firebase: null,
   }
 
-  componentWillMount() {
-    if (!this.props.users.sessionReducer.authUser) {
-      console.log('Signin page show')
-    }
-    else {      
-      console.log('Signin page hide')
-    }
-  }
-
   componentDidMount() {
+    console.log('Fb Loaded')
     const app = import('firebase/app')
     const auth = import('firebase/auth')
     const database = import('firebase/database')
@@ -37,10 +29,7 @@ class SignInPage extends Component {
       const firebase = getFirebase(values[0])
       this.setState({ firebase })
     })
-
-
   }
-
 
   render() {
     return (
@@ -55,17 +44,17 @@ const SignInPageData = props => {
   return (
     <Fragment>
         {
-          props.users.sessionReducer.authUser ? (
+          !props.users.sessionReducer.authUser ? (
             // navigate(routes.LANDING)
-                <Redirect to={routes.LANDING} noThrow/>
-          ) : (
             <Layout>
-              <div className="container signinpage">
-                {' '}
-                <h1>Log In</h1> <SignInForm /> <PasswordForgetLink />{' '}
-                <SignUpLink />{' '}
-              </div>
-            </Layout>
+            <div className="container signinpage">
+              {' '}
+              <h1>Log In</h1> <SignInForm /> <PasswordForgetLink />{' '}
+              <SignUpLink />{' '}
+            </div>
+          </Layout>
+          ) : (
+            <Redirect to={routes.LANDING} noThrow/>
           )
         }
     </Fragment>
