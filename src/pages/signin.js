@@ -33,9 +33,9 @@ class SignInPage extends Component {
 
   render() {
     return (
-      <FirebaseContext.Provider value={this.state.firebase}>
-        <SignInPageData {...this.props} />
-      </FirebaseContext.Provider>
+      <FirebaseContext.Consumer value={this.state.firebase}>
+        {firebase => <SignInPageData {...this.props} />}
+      </FirebaseContext.Consumer>
     )
   }
 }
