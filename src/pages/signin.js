@@ -19,6 +19,15 @@ class SignInPage extends Component {
     firebase: null,
   }
 
+  componentWillMount() {
+    if (!this.props.users.sessionReducer.authUser) {
+      console.log('Signin page show')
+    }
+    else {      
+      console.log('Signin page hide')
+    }
+  }
+
   componentDidMount() {
     const app = import('firebase/app')
     const auth = import('firebase/auth')
@@ -31,6 +40,7 @@ class SignInPage extends Component {
 
 
   }
+
 
   render() {
     return (
