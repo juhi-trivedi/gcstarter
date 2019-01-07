@@ -11,6 +11,8 @@ import FirebaseContext from '../components/Firebase/FirebaseContext'
 import withAuthentication from '../components/Session/withAuthentication'
 import { connect } from 'react-redux'
 import { compose } from 'recompose'
+import cookie from 'react-cookies'
+
 class SignInPage extends Component {
   state = {
     firebase: null,
@@ -37,10 +39,11 @@ class SignInPage extends Component {
 }
 
 const SignInPageData = props => {
+  const saveData = cookie.load('authUser')
   return (
     <Fragment>
         {
-          props.users.sessionReducer.authUser ? (
+         saveData ? (
             navigate(routes.LANDING)
           ) : (
             <Layout>
@@ -53,8 +56,7 @@ const SignInPageData = props => {
           )
         }
     </Fragment>
-  )
-}
+  ) }
 const mapStateToProps = state => {
   return {
     users: state,

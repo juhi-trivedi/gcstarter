@@ -5,12 +5,29 @@ import SignUpForm from '../components/SignUp'
 import { navigate } from 'gatsby'
 import * as routes from '../constants/routes'
 import { connect } from 'react-redux'
+import cookie from 'react-cookies'
+
 class SignUpPage extends Component {
+  constructor() {
+    super()
+    this.state = {
+      route: '',
+    }
+  }
+  componentDidMount() {
+    const saveData = cookie.load('authUser')
+    if (saveData) {
+      this.setState({ route:'' })
+    } else {
+      this.setState({ route: navigate('/') })
+    }
+  }
   render() {
-    const { users } = this.props
+    const { users } = this.props;
+    const saveData = cookie.load('authUser')
     return (
       <Fragment>
-        {users.sessionReducer.authUser ? (
+        {saveData? (
           navigate(routes.LANDING)
         ) : (
           <Layout>
