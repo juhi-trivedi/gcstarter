@@ -7,59 +7,96 @@ import { PasswordForgetLink } from '../components/PasswordForget'
 // import { navigate } from 'gatsby'
 import * as routes from '../constants/routes'
 import getFirebase from '../components/Firebase'
-import FirebaseContext from '../components/Firebase/FirebaseContext'
+// import FirebaseContext from '../components/Firebase/FirebaseContext'
 import withAuthentication from '../components/Session/withAuthentication'
 import { connect } from 'react-redux'
 import { compose } from 'recompose'
 
 import { Redirect } from '@reach/router';
 
+// class SignInPage extends Component {
+//   state = {
+//     firebase: null,
+//     authUser: null
+//   }
+
+//   componentDidMount() {
+//     console.log('Fb Loaded')
+//     const app = import('firebase/app')
+//     const auth = import('firebase/auth')
+//     const database = import('firebase/database')
+
+//     Promise.all([app, auth, database]).then(values => {
+//       const firebase = getFirebase(values[0])
+//       this.setState({ firebase })
+//     })
+//   }
+
+//   render() {
+//     return (
+//       <FirebaseContext.Consumer value={this.state.firebase}>
+//         {firebase => <SignInPageData {...this.props} />}
+//       </FirebaseContext.Consumer>
+//     )
+//   }
+// }
+
+// const SignInPageData = props => {
+//   return (
+//     <Fragment>
+//         {
+//           !props.users.sessionReducer.authUser ? (
+//             // navigate(routes.LANDING)
+//             <Layout>
+//             <div className="container signinpage">
+//               {' '}
+//               <h1>Log In</h1> <SignInForm /> <PasswordForgetLink />{' '}
+//               <SignUpLink />{' '}
+//             </div>
+//           </Layout>
+//           ) : (
+//             <Redirect to={routes.LANDING} noThrow/>
+//           )
+//         }
+//     </Fragment>
+//   )
+// }
+
 class SignInPage extends Component {
-  state = {
-    firebase: null,
-  }
-
-  componentDidMount() {
-    console.log('Fb Loaded')
-    const app = import('firebase/app')
-    const auth = import('firebase/auth')
-    const database = import('firebase/database')
-
-    Promise.all([app, auth, database]).then(values => {
-      const firebase = getFirebase(values[0])
-      this.setState({ firebase })
-    })
-  }
-
-  render() {
-    return (
-      <FirebaseContext.Consumer value={this.state.firebase}>
-        {firebase => <SignInPageData {...this.props} />}
-      </FirebaseContext.Consumer>
-    )
-  }
-}
-
-const SignInPageData = props => {
-  return (
-    <Fragment>
-        {
-          !props.users.sessionReducer.authUser ? (
-            // navigate(routes.LANDING)
-            <Layout>
+    state = {
+      firebase: null,
+      authUser: null
+    }
+  
+    componentDidMount() {
+      console.log('Fb Loaded')
+      const app = import('firebase/app')
+      const auth = import('firebase/auth')
+      const database = import('firebase/database')
+  
+      Promise.all([app, auth, database]).then(values => {
+        const firebase = getFirebase(values[0])
+        this.setState({ firebase })
+      })
+    }
+  
+    render() {
+      return (
+      <Fragment>
+        { this.props.users.sessionReducer.authUser 
+          ? <Redirect to={routes.LANDING} noThrow /> 
+          :   <Layout>
             <div className="container signinpage">
-              {' '}
-              <h1>Log In</h1> <SignInForm /> <PasswordForgetLink />{' '}
-              <SignUpLink />{' '}
+              <h1>Log In</h1> <SignInForm /> <PasswordForgetLink />
+              <SignUpLink />
             </div>
           </Layout>
-          ) : (
-            <Redirect to={routes.LANDING} noThrow/>
-          )
         }
-    </Fragment>
-  )
-}
+      </Fragment>
+      )
+    }
+  }
+
 const mapStateToProps = state => {
   return {
     users: state,
