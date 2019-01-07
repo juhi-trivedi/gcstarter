@@ -4,13 +4,16 @@ import Layout from '../components/layout'
 import SignInForm from '../components/SignIn'
 import { SignUpLink } from '../components/SignUp'
 import { PasswordForgetLink } from '../components/PasswordForget'
-import { navigate } from 'gatsby'
+// import { navigate } from 'gatsby'
 import * as routes from '../constants/routes'
 import getFirebase from '../components/Firebase'
 import FirebaseContext from '../components/Firebase/FirebaseContext'
 import withAuthentication from '../components/Session/withAuthentication'
 import { connect } from 'react-redux'
 import { compose } from 'recompose'
+
+import { Redirect } from '@reach/router';
+
 class SignInPage extends Component {
   state = {
     firebase: null,
@@ -41,7 +44,8 @@ const SignInPageData = props => {
     <Fragment>
         {
           props.users.sessionReducer.authUser ? (
-            navigate(routes.LANDING)
+            // navigate(routes.LANDING)
+                <Redirect to={routes.LANDING} noThrow/>
           ) : (
             <Layout>
               <div className="container signinpage">
