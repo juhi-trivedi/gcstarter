@@ -6,7 +6,7 @@ import { connect } from 'react-redux'
 import { compose } from 'recompose'
 import cookie from 'react-cookies'
 import { navigate } from 'gatsby'
-import AuthUserContext from '../components/Session/AuthUserContext';
+import AuthUserContext from '../components/Session/AuthUserContext'
 
 // const Contact = () => (
 
@@ -72,25 +72,28 @@ class Contact extends Component {
     this.state = {
       route: '',
     }
-   
   }
   componentDidMount() {
     //this.setState({ route: navigate('/') })
+    const saveData = cookie.load('authUser')
+    if (saveData) {
+      this.setState({ route: '' })
+    } else {
+      this.setState({ route: navigate('/') })
+    }
   }
   render() {
     const saveData = cookie.load('authUser')
     return (
-      // <Fragment>
-      //   {saveData ? (
+      <Fragment>
+        {saveData ? (
           <Layout>
             <ContactPage />
           </Layout>
-      //   ) : (
-      //     <AuthUserContext.Consumer>
-      //       {navigate('/')}
-      //     </AuthUserContext.Consumer>
-      //   )}
-      // </Fragment>
+        ) : (
+          this.state.route
+        )}
+      </Fragment>
     )
   }
 }
