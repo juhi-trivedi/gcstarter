@@ -31,7 +31,8 @@ const withAuthentication = Component => {
             this.props.onSetAuthUser(authUser)
           },
           () => {
-            cookie.remove('authUser')
+            // console.log('removed')
+            cookie.remove('authUser', { path: '/' })
             this.setState({ authUser: null })
             this.props.onSetAuthUser(null)
           }

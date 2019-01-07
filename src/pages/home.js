@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react'
 import { navigate } from 'gatsby'
 import Layout from '../components/layout'
+import Main from '../pages/index'
 import withAuthorization from '../components/Session/withAuthorization'
 import { StaticQuery, Link, graphql } from 'gatsby'
 import HeadText from '../components/headText'
@@ -97,6 +98,10 @@ const HomePage = compose(
   ),
   withAuthorization(authCondition)
 )(HomePageBase)
+
+const NavigateRoute = () => {
+  return navigate('/')
+}
 class Home extends Component {
   constructor() {
     super()
@@ -105,20 +110,25 @@ class Home extends Component {
     }
   }
   componentDidMount() {
-    //this.setState({ route: navigate('/') })
+    const saveData = cookie.load('authUser')
+    if (saveData) {
+      this.setState({ route:'' })
+    } else {
+      this.setState({ route: navigate('/') })
+    }
   }
   render() {
     const saveData = cookie.load('authUser')
     return (
-      // <Fragment>
-      //   {saveData ? (
+      <Fragment>
+        {saveData ? (
           <Layout>
             <HomePage />
           </Layout>
-      //   ) : (
-      //     this.state.route
-      //   )}
-      // </Fragment>
+        ) : (
+          this.state.route
+        )}
+      </Fragment>
     )
   }
 }
