@@ -21,7 +21,7 @@ const BlogPost = ({ node }) => {
   )
 }
 
-const BlogListData = ({ data }) => (
+const BlogListData = ({}) => (
   <StaticQuery
     query={graphql`
       query pagesListQuery {
@@ -59,7 +59,47 @@ const BlogListData = ({ data }) => (
     render={data => (
       <>
         <ul className="blog-post">
-          {data.allContentfulBlog.edges.map(edge => (
+          {data.allContentfulBlog.edges.map(edge =>
+            <BlogPost node={edge.node} key={Math.random()} />
+          )}
+        </ul>
+      </>
+    )}
+  />
+  //<></>
+)
+
+const SearchedBlogListData = ({}) => (
+  <StaticQuery
+    query={graphql`
+    query pagesListQuery1 {
+      allContentfulBlog(
+        filter: { title: { regex: "/oo/" } }
+        sort: { fields: [publishDate], order: DESC }
+      ) {
+        edges {
+          node {
+            title
+            slug
+            body {
+              childMarkdownRemark {
+                excerpt
+              }
+            }
+            heroImage {
+              fixed(height: 300) {
+                src
+              }
+            }
+          }
+        }
+      }
+    }
+    `}
+    render={data1 => (
+      <>
+        <ul className="blog-post">
+          {data1.allContentfulBlog.edges.map(edge => (
             <BlogPost node={edge.node} key={Math.random()} />
           ))}
         </ul>
@@ -68,13 +108,36 @@ const BlogListData = ({ data }) => (
   />
 )
 class HomePageBase extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      searchQuery: '', // 4
+    }
+  }
+
+  onChange(e) {
+    // 5
+    const value = e.target.value
+    this.setState({ searchQuery:value})
+  }
+
   render() {
+    console.log(typeof this.state.searchQuery)
     return (
       <React.Fragment>
         {this.props.users.sessionReducer.authUser ? (
           <div className="container">
+            <input
+              style={styles.input}
+              onChange={this.onChange.bind(this)}
+              placeholder="Search for blog"
+            />
             <HeadText />
-            <BlogListData />
+            {this.state.searchQuery === '' ? (
+              <BlogListData />
+            ) : (
+              <SearchedBlogListData />
+            )}
           </div>
         ) : (
           navigate('/')
@@ -99,9 +162,9 @@ const HomePage = compose(
   withAuthorization(authCondition)
 )(HomePageBase)
 
-const NavigateRoute = () => {
-  return navigate('/')
-}
+// const NavigateRoute = () => {
+//   return navigate('/')
+// }
 class Home extends Component {
   constructor() {
     super()
@@ -112,7 +175,7 @@ class Home extends Component {
   componentDidMount() {
     const saveData = cookie.load('authUser')
     if (saveData) {
-      this.setState({ route:'' })
+      this.setState({ route: '' })
     } else {
       this.setState({ route: navigate('/') })
     }
@@ -133,3 +196,23 @@ class Home extends Component {
   }
 }
 export default () => <Home />
+const styles = {
+  container: {
+    padding: 10,
+    borderBottom: '1px solid #ddd',
+  },
+  title: {
+    fontSize: 18,
+  },
+  description: {
+    fontSize: 15,
+    color: 'rgba(0, 0, 0, .5)',
+  },
+  input: {
+    height: 40,
+    width: 300,
+    padding: 7,
+    fontSize: 15,
+    outline: 'none',
+  },
+}
