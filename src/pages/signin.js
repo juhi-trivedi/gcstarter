@@ -45,7 +45,8 @@ const SignInPageData = props => {
         {
           props.users.sessionReducer.authUser ? (
             // navigate(routes.LANDING)
-                <Redirect to={routes.LANDING} noThrow/>
+                // <Redirect to={routes.LANDING} noThrow/>
+                console.log('Signin Page coming to display')
           ) : (
             <Layout>
               <div className="container signinpage">
