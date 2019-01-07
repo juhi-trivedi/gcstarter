@@ -28,6 +28,8 @@ class SignInPage extends Component {
       const firebase = getFirebase(values[0])
       this.setState({ firebase })
     })
+
+
   }
 
   render() {
@@ -45,8 +47,7 @@ const SignInPageData = props => {
         {
           props.users.sessionReducer.authUser ? (
             // navigate(routes.LANDING)
-                // <Redirect to={routes.LANDING} noThrow/>
-                console.log('Signin Page coming to display')
+                <Redirect to={routes.LANDING} noThrow/>
           ) : (
             <Layout>
               <div className="container signinpage">
