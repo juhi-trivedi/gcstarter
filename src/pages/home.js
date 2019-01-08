@@ -1,7 +1,6 @@
 import React, { Component, Fragment } from 'react'
 import { navigate } from 'gatsby'
 import Layout from '../components/layout'
-import Main from '../pages/index'
 import withAuthorization from '../components/Session/withAuthorization'
 import { StaticQuery, Link, graphql } from 'gatsby'
 import HeadText from '../components/headText'
@@ -12,19 +11,29 @@ import cookie from 'react-cookies'
 const BlogPost = ({ node }) => {
   return (
     <li>
-      <img src={node.heroImage.fixed.src} alt={node.title} />
+      <img src={node.node.heroImage.fixed.src} alt={node.node.title} />
       <div className="blogtext">
-        <Link to={node.slug}>{node.title}</Link>
-        <p>{node.body.childMarkdownRemark.excerpt}</p>
+        <Link to={node.node.slug}>{node.node.title}</Link>
+        <p>{node.node.body.childMarkdownRemark.excerpt}</p>
       </div>
     </li>
   )
 }
 
-const BlogListData = ({}) => (
+const NoMatchFound = data => {
+  return (
+    <li>
+      <div>
+        <p>no data found</p>
+      </div>
+    </li>
+  )
+}
+
+const SearchedBlogListData = ({ searchQuery }) => (
   <StaticQuery
     query={graphql`
-      query pagesListQuery {
+      query pagesListQuery1 {
         allContentfulBlog(
           filter: { node_locale: { eq: "en-US" } }
           sort: { fields: [publishDate], order: DESC }
@@ -46,62 +55,20 @@ const BlogListData = ({}) => (
             }
           }
         }
-        allContentfulPages {
-          edges {
-            node {
-              title
-              slug
-            }
-          }
-        }
       }
-    `}
-    render={data => (
-      <>
-        <ul className="blog-post">
-          {data.allContentfulBlog.edges.map(edge =>
-            <BlogPost node={edge.node} key={Math.random()} />
-          )}
-        </ul>
-      </>
-    )}
-  />
-  //<></>
-)
-
-const SearchedBlogListData = ({}) => (
-  <StaticQuery
-    query={graphql`
-    query pagesListQuery1 {
-      allContentfulBlog(
-        filter: { title: { regex: "/oo/" } }
-        sort: { fields: [publishDate], order: DESC }
-      ) {
-        edges {
-          node {
-            title
-            slug
-            body {
-              childMarkdownRemark {
-                excerpt
-              }
-            }
-            heroImage {
-              fixed(height: 300) {
-                src
-              }
-            }
-          }
-        }
-      }
-    }
     `}
     render={data1 => (
       <>
         <ul className="blog-post">
-          {data1.allContentfulBlog.edges.map(edge => (
-            <BlogPost node={edge.node} key={Math.random()} />
-          ))}
+          {data1.allContentfulBlog.edges.map(item => {
+            if (searchQuery !== '') {
+              if (item.node.title.match(new RegExp(searchQuery, 'gi'))) {
+                return <BlogPost node={item} key={Math.random()} />
+              }
+            } else {
+              return <BlogPost node={item} key={Math.random()} />
+            }
+          })}
         </ul>
       </>
     )}
@@ -111,18 +78,18 @@ class HomePageBase extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      searchQuery: '', // 4
+      searchQuery: '',
     }
   }
 
   onChange(e) {
     // 5
     const value = e.target.value
-    this.setState({ searchQuery:value})
+    this.setState({ searchQuery: value })
   }
 
   render() {
-    console.log(typeof this.state.searchQuery)
+    // console.log(this.state.searchQuery)
     return (
       <React.Fragment>
         {this.props.users.sessionReducer.authUser ? (
@@ -133,11 +100,7 @@ class HomePageBase extends Component {
               placeholder="Search for blog"
             />
             <HeadText />
-            {this.state.searchQuery === '' ? (
-              <BlogListData />
-            ) : (
-              <SearchedBlogListData />
-            )}
+            <SearchedBlogListData searchQuery={this.state.searchQuery} />
           </div>
         ) : (
           navigate('/')

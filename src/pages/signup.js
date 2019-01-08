@@ -23,7 +23,6 @@ class SignUpPage extends Component {
     }
   }
   render() {
-    const { users } = this.props;
     const saveData = cookie.load('authUser')
     return (
       <Fragment>

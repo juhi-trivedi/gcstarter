@@ -7,7 +7,7 @@ import withAuthorization from '../components/Session/withAuthorization'
 import { connect } from 'react-redux'
 import { compose } from 'recompose'
 import cookie from 'react-cookies'
-import * as routes from '../constants/routes'
+// import * as routes from '../constants/routes'
 
 const InnerPageContent = ({ data }) => (
   <div className="innerpage">

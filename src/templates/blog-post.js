@@ -4,7 +4,7 @@ import Helmet from 'react-helmet'
 import Layout from '../components/layout'
 import Disqus from '../components/Disqus'
 import { connect } from 'react-redux'
-import { compose } from 'recompose'
+// import { compose } from 'recompose'
 class BlogPost extends Component {
   handleNewComment(comment) {
     console.log(comment.text)

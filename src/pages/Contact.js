@@ -6,7 +6,7 @@ import { connect } from 'react-redux'
 import { compose } from 'recompose'
 import cookie from 'react-cookies'
 import { navigate } from 'gatsby'
-import AuthUserContext from '../components/Session/AuthUserContext'
+// import AuthUserContext from '../components/Session/AuthUserContext'
 
 // const Contact = () => (
 
