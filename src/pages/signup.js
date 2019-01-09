@@ -6,35 +6,41 @@ import { navigate } from 'gatsby'
 import * as routes from '../constants/routes'
 import { connect } from 'react-redux'
 import cookie from 'react-cookies'
+import Loader from '../components/Loader'
 
 class SignUpPage extends Component {
   constructor() {
     super()
     this.state = {
-      route: '',
+      user: '',
+      isLoading: true,
     }
   }
   componentDidMount() {
     const saveData = cookie.load('authUser')
     if (saveData) {
-      this.setState({ route:'' })
+      this.setState({ user: saveData })
     } else {
-      this.setState({ route: navigate('/') })
+      this.setState({ user: '' })
     }
+    setTimeout(() => this.setState({ isLoading: false }), 1000)
   }
+
   render() {
-    const saveData = cookie.load('authUser')
     return (
       <Fragment>
-        {saveData? (
+        {this.state.user != '' ? (
           navigate(routes.LANDING)
         ) : (
-          <Layout>
-            <div className="container signinpage">
-              {' '}
-              <h1>Sign Up</h1> <SignUpForm />{' '}
-            </div>
-          </Layout>
+          <>
+            {this.state.isLoading === true ? <Loader /> : null}
+            <Layout>
+              <div className="container signinpage">
+                {' '}
+                <h1>Sign Up</h1> <SignUpForm />{' '}
+              </div>
+            </Layout>
+          </>
         )}
       </Fragment>
     )

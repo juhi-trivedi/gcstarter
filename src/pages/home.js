@@ -125,9 +125,6 @@ const HomePage = compose(
   withAuthorization(authCondition)
 )(HomePageBase)
 
-// const NavigateRoute = () => {
-//   return navigate('/')
-// }
 class Home extends Component {
   constructor() {
     super()

@@ -12,10 +12,11 @@ import withAuthentication from '../components/Session/withAuthentication'
 import { connect } from 'react-redux'
 import { compose } from 'recompose'
 import cookie from 'react-cookies'
-
+import Loader from '../components/Loader'
 class SignInPage extends Component {
   state = {
     firebase: null,
+    isLoading: true,
   }
 
   componentDidMount() {
@@ -27,12 +28,13 @@ class SignInPage extends Component {
       const firebase = getFirebase(values[0])
       this.setState({ firebase })
     })
+    setTimeout(() => this.setState({ isLoading: false }), 1000);
   }
 
   render() {
     return (
       <FirebaseContext.Provider value={this.state.firebase}>
-        <SignInPageData {...this.props} />
+        <SignInPageData {...this.props} load={this.state.isLoading} />
       </FirebaseContext.Provider>
     )
   }
@@ -42,21 +44,23 @@ const SignInPageData = props => {
   const saveData = cookie.load('authUser')
   return (
     <Fragment>
-        {
-         saveData ? (
-            navigate(routes.LANDING)
-          ) : (
-            <Layout>
-              <div className="container signinpage">
-                {' '}
-                <h1>Log In</h1> <SignInForm /> <PasswordForgetLink />{' '}
-                <SignUpLink />{' '}
-              </div>
-            </Layout>
-          )
-        }
+      {saveData ? (
+        navigate(routes.LANDING)
+      ) : (
+        <>
+          {props.load === true ? <Loader /> : null}
+          <Layout>
+            <div className="container signinpage">
+              {' '}
+              <h1>Log In</h1> <SignInForm /> <PasswordForgetLink />{' '}
+              <SignUpLink />{' '}
+            </div>
+          </Layout>
+        </>
+      )}
     </Fragment>
-  ) }
+  )
+}
 const mapStateToProps = state => {
   return {
     users: state,
