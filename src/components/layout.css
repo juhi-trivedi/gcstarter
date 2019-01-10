@@ -973,6 +973,10 @@ footer p {
   }
 }
 
+.errorClass {
+  color: red;
+}
+
 /*search bar for blog page */
 
 .search-input {
