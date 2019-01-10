@@ -20,7 +20,7 @@ class ContactForm extends Component {
             action="https://formspree.io/juhi.trivedi@multidots.com"
             method="POST"
           >
-            <input type="hidden" name="_next" value="thanks" />
+            {/* <input type="hidden" name="_next" value="thanks" /> */}
             <p>
               <label>Your name: </label>
               <input type="text" name="name" />
