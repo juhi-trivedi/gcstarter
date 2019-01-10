@@ -4,7 +4,7 @@ class Loader extends Component {
   render() {
     return (
       <div className="loader-box">
-        <div className="loader" />
+        <div class="lds-ripple"><div/><div/></div>
       </div>
     )
   }

@@ -94,11 +94,17 @@ class HomePageBase extends Component {
       <React.Fragment>
         {this.props.users.sessionReducer.authUser ? (
           <div className="container">
-            <input
-              style={styles.input}
-              onChange={this.onChange.bind(this)}
-              placeholder="Search for blog"
-            />
+              <div class="search-input">
+              <input
+                style={styles.input}
+                onChange={this.onChange.bind(this)}
+              />
+              <span class="highlight"></span>
+              <span class="bar"></span>
+              <label>Search for blog</label>
+              <span class="icon-search"></span>
+              {/* <span class="icon-search-cross"></span> */}
+            </div>
             <HeadText />
             <SearchedBlogListData searchQuery={this.state.searchQuery} />
           </div>
