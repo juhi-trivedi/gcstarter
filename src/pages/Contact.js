@@ -6,9 +6,6 @@ import { connect } from 'react-redux'
 import { compose } from 'recompose'
 import cookie from 'react-cookies'
 import { navigate } from 'gatsby'
-// import AuthUserContext from '../components/Session/AuthUserContext'
-
-// const Contact = () => (
 
 class ContactForm extends Component {
   render() {
@@ -20,7 +17,6 @@ class ContactForm extends Component {
             action="https://formspree.io/juhi.trivedi@multidots.com"
             method="POST"
           >
-            {/* <input type="hidden" name="_next" value="thanks" /> */}
             <p>
               <label>Your name: </label>
               <input type="text" name="name" />
@@ -60,12 +56,6 @@ const ContactPage = compose(
   withAuthorization(authCondition)
 )(ContactForm)
 
-// export default () => (
-//   <Layout>
-//     <ContactPage />
-//   </Layout>
-// )
-
 class Contact extends Component {
   constructor() {
     super()
@@ -74,7 +64,6 @@ class Contact extends Component {
     }
   }
   componentDidMount() {
-    //this.setState({ route: navigate('/') })
     const saveData = cookie.load('authUser')
     if (saveData) {
       this.setState({ route: '' })

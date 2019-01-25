@@ -7,7 +7,6 @@ import withAuthorization from '../components/Session/withAuthorization'
 import { connect } from 'react-redux'
 import { compose } from 'recompose'
 import cookie from 'react-cookies'
-// import * as routes from '../constants/routes'
 
 const InnerPageContent = ({ data }) => (
   <div className="innerpage">
@@ -60,7 +59,6 @@ class InnerPage extends Component {
     }
   }
   componentDidMount() {
-    //this.setState({ route: navigate('/') })
     const saveData = cookie.load('authUser')
     if (saveData) {
       this.setState({ route: '' })
@@ -68,6 +66,7 @@ class InnerPage extends Component {
       this.setState({ route: navigate('/') })
     }
   }
+  
   render() {
     const saveData = cookie.load('authUser')
     return (

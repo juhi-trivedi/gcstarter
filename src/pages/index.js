@@ -44,7 +44,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => ({
   clickedOnBlog: () => dispatch(Actions.clickedOnBlog(true)),
 })
-//const IndexPage = withAuthentication(IndexPageBase)
+
 const Index1 = compose(
   withAuthentication,
   connect(

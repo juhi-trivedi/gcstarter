@@ -1,4 +1,3 @@
-
 const config = {
   apiKey: 'AIzaSyB_EC4kekLVlRJS5Xq3uZXgZEd9_x36PvA',
   authDomain: 'gcstarter01.firebaseapp.com',
@@ -33,6 +32,22 @@ class Firebase {
 
   doSignOut = () => this.auth.signOut()
 
+  doAutoSignOut = (email, password) =>
+    this.auth
+      .setPersistence(firebase.auth.Auth.Persistence.SESSION)
+      .then(function() {
+        // Existing and future Auth states are now persisted in the current
+        // session only. Closing the window would clear any existing state even
+        // if a user forgets to sign out.
+        // ...
+        // New sign-in will be persisted with session persistence.
+        return this.auth.signInWithEmailAndPassword(email, password)
+      })
+      .catch(function(error) {
+        // Handle Errors here.
+        var errorCode = error.code
+        var errorMessage = error.message
+      })
   doPasswordReset = email => this.auth.sendPasswordResetEmail(email)
 
   doSendEmailVerification = () =>
@@ -65,7 +80,6 @@ class Firebase {
               providerData: authUser.providerData,
               ...dbUser,
             }
-
             next(authUser)
           })
       } else {

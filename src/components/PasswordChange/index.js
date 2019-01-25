@@ -7,11 +7,9 @@ const INITIAL_STATE = {
   passwordTwo: '',
   error: null,
 };
-
 class PasswordChangeForm extends Component {
   constructor(props) {
     super(props);
-
     this.state = { ...INITIAL_STATE };
   }
 

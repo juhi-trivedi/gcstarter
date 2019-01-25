@@ -6,7 +6,7 @@ import blogReducer from './blogReducer'
 const rootReducer = combineReducers({
   userReducer,
   sessionReducer,
-  blogReducer
+  // blogReducer
 })
 
 export default rootReducer

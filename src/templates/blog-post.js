@@ -8,7 +8,6 @@ import { connect } from 'react-redux'
 import { compose } from 'recompose'
 import cookie from 'react-cookies'
 import { navigate } from 'gatsby'
-// import { compose } from 'recompose'
 
 const BlogPageContent = ({ data }) => (
 <>
@@ -48,8 +47,8 @@ class BlogPost extends Component {
       route: '',
     }
   }
+
   componentDidMount() {
-    //this.setState({ route: navigate('/') })
     const saveData = cookie.load('authUser')
     if (saveData) {
       this.setState({ route: '' })
@@ -57,6 +56,7 @@ class BlogPost extends Component {
       this.setState({ route: navigate('/') })
     }
   }
+
   render() {
     const saveData = cookie.load('authUser')
     return (
@@ -76,8 +76,6 @@ class BlogPost extends Component {
 BlogPost.propTypes = {
   data: PropTypes.object.isRequired,
 }
-
-
 
 export default BlogPost
 

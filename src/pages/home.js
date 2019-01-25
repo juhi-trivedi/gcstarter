@@ -20,16 +20,6 @@ const BlogPost = ({ node }) => {
   )
 }
 
-const NoMatchFound = data => {
-  return (
-    <li>
-      <div>
-        <p>no data found</p>
-      </div>
-    </li>
-  )
-}
-
 const SearchedBlogListData = ({ searchQuery }) => (
   <StaticQuery
     query={graphql`
@@ -83,13 +73,11 @@ class HomePageBase extends Component {
   }
 
   onChange(e) {
-    // 5
     const value = e.target.value
     this.setState({ searchQuery: value })
   }
 
   render() {
-    // console.log(this.state.searchQuery)
     return (
       <React.Fragment>
         {this.props.users.sessionReducer.authUser ? (
@@ -103,7 +91,6 @@ class HomePageBase extends Component {
               <span class="bar"></span>
               <label>Search for blog</label>
               <span class="icon-search"></span>
-              {/* <span class="icon-search-cross"></span> */}
             </div>
             <HeadText />
             <SearchedBlogListData searchQuery={this.state.searchQuery} />

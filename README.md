@@ -4,29 +4,40 @@
   </a>
 </p>
 <h1 align="center">
-  Gatsby starter
+  Gatsby + ContentFul + Firebase
 </h1>
 
-Kick off your project with this default boilerplate ([live demo](https://gcstarter.netlify.com/)).
+o [Live demo](https://gcstarter.netlify.com/).
 
-In this **ContentFul-Gatsby** demo, firebase authentication has been used for use login and signup.
+**Features** 
 
-Also to get user details redux has been used.
-
-For the Contact-Form ```Formspree```used.
+- uses:
+  - Gatsby.js (react + redux)
+  - Firebase
+  - ContentFul
+  - Formspree
+- features:
+  - Sign in
+  - Sign up
+  - Forget Password
+  - Sign out
+  - Protected routes with authorization
+  - Contact form submitted to **Formspree**
 
 **Quick start**
 
-   ```Take the clone of this project.```
-    ```npm install```
+  -  ```Take the clone of this project.```
+  -  ```npm install```
 
-To run successfully **Firebase** and **ContentFul** details are required.
+To run successfully use yours **Firebase** and **ContentFul** credentials.
 
-then.
+**Use your own Firebase Credentials**
+- visit https://firebase.google.com/ and create a Firebase App then,
 
 ```gatsby develop```
 
 Here it's running...😊
+
 ```http://localhost:8000/```
 
 
