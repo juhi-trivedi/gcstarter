@@ -1,6 +1,6 @@
 module.exports = {
   siteMetadata: {
-    title: 'Starter',
+    title: 'Blogger',
   },
   plugins: [
     'gatsby-plugin-react-helmet',
@@ -34,6 +34,7 @@ module.exports = {
     },
     'gatsby-transformer-remark',
     `gatsby-plugin-react-helmet`,
+    `gatsby-remark-images-contentful`,
     'gatsby-plugin-styled-components'
   ],
 }

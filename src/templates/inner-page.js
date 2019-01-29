@@ -20,7 +20,7 @@ const InnerPageContent = ({ data }) => (
       <Helmet>
         <title>{`${data.contentfulPages.title}`}</title>
       </Helmet>
-      <div
+      <div className="innerpage_content"
         dangerouslySetInnerHTML={{
           __html: data.contentfulPages.body.childMarkdownRemark.html,
         }}

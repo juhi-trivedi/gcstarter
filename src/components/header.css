@@ -13,6 +13,7 @@ header .logo img {
 header .logo {
     display: inline-block;
     float: left;
+    padding-left: 10px;
 }
 
 header ul.menulist {
@@ -44,4 +45,14 @@ header ul.menulist li a, header ul.menulist li button {
 
 header ul.menulist li:last-of-type a {
     padding-right: 0;
+}
+
+@media (max-width: 1200px) {
+    header ul.menulist li:last-of-type a{ padding-right: 10px; }
+}
+
+@media (max-width: 680px) {
+    header ul.menulist, header .logo { float: none; width: 100%; }
+    header { text-align: center }
+    header ul.menulist li a, header ul.menulist li button { padding: 0 10px; font-size: 13px;}
 }

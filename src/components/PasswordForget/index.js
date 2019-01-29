@@ -7,6 +7,7 @@ import { withFirebase } from '../Firebase/FirebaseContext';
 const INITIAL_STATE = {
   email: '',
   error: null,
+  message: '',
 };
 
 class PasswordForgetForm extends Component {
@@ -22,7 +23,11 @@ class PasswordForgetForm extends Component {
     this.props.firebase
       .doPasswordReset(email)
       .then(() => {
-        this.setState(() => ({ ...INITIAL_STATE }));
+        this.setState(() => ({ 
+          email: '',
+          error: null,
+          message: 'Password Reset Link is sent to your Email Address',
+        }));
       })
       .catch(error => {
         this.setState({ error });
@@ -49,8 +54,9 @@ class PasswordForgetForm extends Component {
         <button disabled={isInvalid} type="submit">
           Reset My Password
         </button>
+        <p className="signup_success">{this.state.message}</p>
 
-        {error && <p>{error.message}</p>}
+        {error && <p className="signup_error">{error.message}</p>}
       </form>
     );
   }

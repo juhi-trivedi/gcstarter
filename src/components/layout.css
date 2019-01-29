@@ -628,14 +628,17 @@ pre tt:after {
 ul.blog-post {
 	list-style: none;
 	font-size: 0px;
-	margin-left: -2.5%;
+  margin-left: -2.5%;
+  display: flex;
+  flex-wrap: wrap;
+  /* justify-content: center; */
 }
 
 ul.blog-post li {
   display: inline-block;
   border-radius: 3px;
   width: 44.8%;
-  margin: 0 0 5% 5%;
+  margin: 0 0 5% 4%;
   background: #fff;
   border: 1px solid #eee;
   font-size: 16px;
@@ -735,6 +738,13 @@ ul.blog-post li p {
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
   vertical-align: middle;
   width: calc(100% - 120px);
+  font-family: Open Sans, sans-serif;
+}
+
+.contactform form input + span.signup_error {
+  padding-left: 120px;
+  font-family: Open Sans, sans-serif;
+  font-size: 16px;
 }
 
 .contactform form textarea {
@@ -830,6 +840,13 @@ footer p {
   float: none;
 }
 
+.signinpage form button:disabled, .contactform form button:disabled:hover, .thankyoupage a:disabled:hover, .contactform form input[type="submit"]:disabled:hover, .pwdforgot button:disabled:hover, .contactform form button:disabled, .thankyoupage a:disabled, .contactform form input[type="submit"]:disabled {
+  background: #dddddd;
+  cursor: not-allowed;
+  border-color: #dddddd;
+  color: #fff !important
+}
+
 .signinpage form input {
   width: 100%;
     margin-bottom: 25px;
@@ -877,7 +894,13 @@ footer p {
 
 .signup_error {
   margin-top: 15px;
-  color: red;
+  color: red;    
+  display: block;
+}
+.signup_success {
+  margin-top: 15px;
+  color: green;    
+  display: block;
 }
 
 .landingpage {
@@ -890,7 +913,8 @@ footer p {
   text-align: center;
 }
 .landingpage h1{
-  line-height: normal
+  line-height: normal;    
+  text-shadow: 1px 1px 2px #fff;
 }
 
 .landingpage .signinlink {
@@ -985,7 +1009,7 @@ footer p {
   position: relative;
   padding: 1rem 0 0 0;
   margin-bottom: 25px;
-  width: 90%;
+  width: 95%;
   margin: 1.5rem auto 25px;
 }
 
@@ -1078,4 +1102,24 @@ footer p {
   width: 100%;
   margin-left: 0;
   margin: 0 auto;
+}
+@media (max-width: 1200px) {
+  .innerpage_content, .blogdetails {
+      padding-left: 15px;
+      padding-right: 15px;
+  }
+  .contactform form, .contactform .gmap {padding: 0 15px; }
+}
+
+@media (max-width: 767px) {
+  ul.blog-post li, .contactform form input, .contactform form textarea, .signinpage form input, .pwdforgot input[type="text"] {
+    width: 90%;
+    margin-left: 0;
+  }
+  ul.blog-post { 
+    justify-content: center
+  }
+  .contactform form, .contactform .gmap { width: 100%; padding: 0 15px; }
+  .signinpage { width: 80%;     padding: 30px; }
+  .landingpage {    background-position: top right -145px; }
 }

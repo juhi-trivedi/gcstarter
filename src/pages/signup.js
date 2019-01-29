@@ -29,7 +29,7 @@ class SignUpPage extends Component {
   render() {
     return (
       <Fragment>
-        {this.state.user != '' ? (
+        {this.state.user !== '' ? (
           navigate(routes.LANDING)
         ) : (
           <>
